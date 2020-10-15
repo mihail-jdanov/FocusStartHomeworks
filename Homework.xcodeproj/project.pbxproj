@@ -13,6 +13,8 @@
 		8738AD152538AAC9006CFDF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8738AD132538AAC9006CFDF0 /* Main.storyboard */; };
 		8738AD172538AAC9006CFDF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8738AD162538AAC9006CFDF0 /* Assets.xcassets */; };
 		8738AD1A2538AAC9006CFDF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8738AD182538AAC9006CFDF0 /* LaunchScreen.storyboard */; };
+		8738AD222538AF83006CFDF0 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8738AD212538AF83006CFDF0 /* Car.swift */; };
+		8738AD242538B049006CFDF0 /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8738AD232538B049006CFDF0 /* Body.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		8738AD162538AAC9006CFDF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8738AD192538AAC9006CFDF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8738AD1B2538AAC9006CFDF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8738AD212538AF83006CFDF0 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		8738AD232538B049006CFDF0 /* Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +67,18 @@
 				8738AD162538AAC9006CFDF0 /* Assets.xcassets */,
 				8738AD182538AAC9006CFDF0 /* LaunchScreen.storyboard */,
 				8738AD1B2538AAC9006CFDF0 /* Info.plist */,
+				8738AD252538B6A3006CFDF0 /* Car Model */,
 			);
 			path = Homework;
+			sourceTree = "<group>";
+		};
+		8738AD252538B6A3006CFDF0 /* Car Model */ = {
+			isa = PBXGroup;
+			children = (
+				8738AD212538AF83006CFDF0 /* Car.swift */,
+				8738AD232538B049006CFDF0 /* Body.swift */,
+			);
+			path = "Car Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +154,9 @@
 			files = (
 				8738AD122538AAC9006CFDF0 /* ViewController.swift in Sources */,
 				8738AD0E2538AAC9006CFDF0 /* AppDelegate.swift in Sources */,
+				8738AD222538AF83006CFDF0 /* Car.swift in Sources */,
 				8738AD102538AAC9006CFDF0 /* SceneDelegate.swift in Sources */,
+				8738AD242538B049006CFDF0 /* Body.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
