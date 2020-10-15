@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Body: Int {
+enum Body: Int, CaseIterable {
     
     case sedan
     case coupe
