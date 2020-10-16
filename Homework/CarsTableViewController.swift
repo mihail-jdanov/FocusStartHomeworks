@@ -47,7 +47,7 @@ class CarsTableViewController: UITableViewController {
         )
     }()
 
-    @IBAction func addCarButtonAction(_ sender: Any) {
+    @IBAction private func addCarButtonAction(_ sender: Any) {
         editCarAlertController.show(over: self, saveActionCompletion: {
             self.tableView.reloadSections([0], with: .fade)
             self.updateEmptyViewAndDeleteButtonVisibility(animated: true)

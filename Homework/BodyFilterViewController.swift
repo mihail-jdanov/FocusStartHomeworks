@@ -28,7 +28,7 @@ class BodyFilterViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func resetButtonAction(_ sender: Any) {
+    @IBAction private func resetButtonAction(_ sender: Any) {
         delegate?.bodyFilterViewControllerDidSetNewBody(nil)
         dismiss(animated: true, completion: nil)
     }
