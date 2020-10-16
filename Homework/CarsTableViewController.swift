@@ -90,8 +90,18 @@ class CarsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
         let car = CarsDataSource.shared.cars[indexPath.row]
-        cell.textLabel?.text = car.manufacturer + " " + car.model
-        cell.detailTextLabel?.text = "\(car.body.stringValue), \(car.yearOfIssue) год выпуска"
+        var yearOfIssueString: String?
+        if let yearOfIssue = car.yearOfIssue { yearOfIssueString = String(yearOfIssue) }
+        var cellText = """
+        Производитель: \(car.manufacturer)
+        Модель: \(car.model)
+        Тип кузова: \(car.body.stringValue)
+        Год выпуска: \(yearOfIssueString ?? "–")
+        """;
+        if let carNumber = car.carNumber {
+            cellText += "\nГос номер: " + carNumber
+        }
+        cell.textLabel?.text = cellText
         return cell
     }
     

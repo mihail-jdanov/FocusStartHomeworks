@@ -11,13 +11,14 @@ import UIKit
 class EditCarAlertController: NSObject {
     
     private let yearOfIssuePickerView = UIPickerView()
-    private let bodyTypePickerView = UIPickerView()
+    private let bodyPickerView = UIPickerView()
     private let maxCharactersCountForTextFields = 30
     
     private var manufacturerTextField: UITextField?
     private var modelTextField: UITextField?
+    private var bodyTextField: UITextField?
     private var yearOfIssueTextField: UITextField?
-    private var bodyTypeTextField: UITextField?
+    private var carNumberTextField: UITextField?
     private var saveAlertAction: UIAlertAction?
     
     override init() {
@@ -28,18 +29,16 @@ class EditCarAlertController: NSObject {
     private func setupPickerViews() {
         yearOfIssuePickerView.delegate = self
         yearOfIssuePickerView.dataSource = self
-        bodyTypePickerView.delegate = self
-        bodyTypePickerView.dataSource = self
+        bodyPickerView.delegate = self
+        bodyPickerView.dataSource = self
     }
     
     private func getPickerViewTitle(_ pickerView: UIPickerView, forRow row: Int) -> String? {
         switch pickerView {
         case yearOfIssuePickerView:
-            if let yearOfIssue = CarsDataSource.shared.yearOfIssuePossibleValues[row] {
-                return String(yearOfIssue)
-            }
-            return "Не выбрано"
-        case bodyTypePickerView:
+            guard let yearOfIssue = CarsDataSource.shared.yearOfIssuePossibleValues[row] else { return nil }
+            return String(yearOfIssue)
+        case bodyPickerView:
             return CarsDataSource.shared.bodyPossibleValues[row].stringValue
         default:
             return nil
@@ -49,33 +48,37 @@ class EditCarAlertController: NSObject {
     @objc
     private func validateTextFields() {
         var isValidationPassed = true
-        let textFields = [manufacturerTextField, modelTextField, yearOfIssueTextField, bodyTypeTextField]
+        let textFields = [manufacturerTextField, modelTextField, bodyTextField]
         for textField in textFields {
-            let text = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let text = textField?.text?.trimmingCharacters(in: .whitespaces) ?? ""
             if text.isEmpty || text.count > maxCharactersCountForTextFields {
                 isValidationPassed = false
             }
         }
+        let carNumber = carNumberTextField?.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        if carNumber.count > maxCharactersCountForTextFields { isValidationPassed = false }
         saveAlertAction?.isEnabled = isValidationPassed
     }
     
     private func saveCar(editingCarIndex: Int?) {
+        guard let manufacturer = manufacturerTextField?.text?.trimmingCharacters(in: .whitespaces),
+            let model = modelTextField?.text?.trimmingCharacters(in: .whitespaces) else { return }
+        let bodyIndex = bodyPickerView.selectedRow(inComponent: 0)
+        let body = CarsDataSource.shared.bodyPossibleValues[bodyIndex]
         let yearOfIssueIndex = yearOfIssuePickerView.selectedRow(inComponent: 0)
-        let bodyTypeIndex = bodyTypePickerView.selectedRow(inComponent: 0)
-        let manufacturer = manufacturerTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let model = modelTextField?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let yearOfIssue = CarsDataSource.shared.yearOfIssuePossibleValues[yearOfIssueIndex]
-        let bodyType = CarsDataSource.shared.bodyPossibleValues[bodyTypeIndex]
+        var carNumber = carNumberTextField?.text?.trimmingCharacters(in: .whitespaces)
+        if carNumber?.isEmpty == true { carNumber = nil }
+        let car = Car(
+            manufacturer: manufacturer,
+            model: model,
+            body: body,
+            yearOfIssue: yearOfIssue,
+            carNumber: carNumber
+        )
         if let index = editingCarIndex {
-            CarsDataSource.shared.cars.remove(at: index)
+            CarsDataSource.shared.cars[index] = car
         } else {
-            let car = Car(
-                manufacturer: manufacturer,
-                model: model,
-                body: bodyType,
-                yearOfIssue: yearOfIssue,
-                carNumber: nil
-            )
             CarsDataSource.shared.cars.append(car)
         }
     }
@@ -85,16 +88,17 @@ class EditCarAlertController: NSObject {
         let car = CarsDataSource.shared.cars[index]
         manufacturerTextField?.text = car.manufacturer
         modelTextField?.text = car.model
+        bodyTextField?.text = car.body.stringValue
+        let bodyTypeIndex = CarsDataSource.shared.bodyPossibleValues.firstIndex(of: car.body) ?? 0
+        bodyPickerView.selectRow(bodyTypeIndex, inComponent: 0, animated: false)
         var yearOfIssue: String?
         if let year = car.yearOfIssue {
             yearOfIssue = String(year)
         }
         yearOfIssueTextField?.text = yearOfIssue
-        bodyTypeTextField?.text = car.body.stringValue
         let yearOfIssueIndex = CarsDataSource.shared.yearOfIssuePossibleValues.firstIndex(of: car.yearOfIssue) ?? 0
         yearOfIssuePickerView.selectRow(yearOfIssueIndex, inComponent: 0, animated: false)
-        let bodyTypeIndex = CarsDataSource.shared.bodyPossibleValues.firstIndex(of: car.body) ?? 0
-        bodyTypePickerView.selectRow(bodyTypeIndex, inComponent: 0, animated: false)
+        carNumberTextField?.text = car.carNumber
     }
     
     func show(over viewController: UIViewController, editingCarIndex: Int? = nil,
@@ -113,17 +117,21 @@ class EditCarAlertController: NSObject {
             textField.addTarget(self, action: #selector(self.validateTextFields), for: .editingChanged)
         }
         alertController.addTextField { (textField) in
-            self.yearOfIssueTextField = textField
-            textField.placeholder = "Год выпуска"
-            textField.inputView = self.yearOfIssuePickerView
+            self.bodyTextField = textField
+            textField.placeholder = "Тип кузова"
+            textField.inputView = self.bodyPickerView
             textField.delegate = self
             textField.addTarget(self, action: #selector(self.validateTextFields), for: .editingChanged)
         }
         alertController.addTextField { (textField) in
-            self.bodyTypeTextField = textField
-            textField.placeholder = "Тип кузова"
-            textField.inputView = self.bodyTypePickerView
+            self.yearOfIssueTextField = textField
+            textField.placeholder = "Год выпуска"
+            textField.inputView = self.yearOfIssuePickerView
             textField.delegate = self
+        }
+        alertController.addTextField { (textField) in
+            self.carNumberTextField = textField
+            textField.placeholder = "Гос номер"
             textField.addTarget(self, action: #selector(self.validateTextFields), for: .editingChanged)
         }
         fillTextFieldsForCarEditing(editingCarIndex: editingCarIndex)
@@ -149,7 +157,7 @@ class EditCarAlertController: NSObject {
 extension EditCarAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return getPickerViewTitle(pickerView, forRow: row)
+        return getPickerViewTitle(pickerView, forRow: row) ?? "Не выбрано"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -157,8 +165,8 @@ extension EditCarAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
         switch pickerView {
         case yearOfIssuePickerView:
             yearOfIssueTextField?.text = title
-        case bodyTypePickerView:
-            bodyTypeTextField?.text = title
+        case bodyPickerView:
+            bodyTextField?.text = title
         default:
             break
         }
@@ -172,7 +180,7 @@ extension EditCarAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
         switch pickerView {
         case yearOfIssuePickerView:
             return CarsDataSource.shared.yearOfIssuePossibleValues.count
-        case bodyTypePickerView:
+        case bodyPickerView:
             return CarsDataSource.shared.bodyPossibleValues.count
         default:
             return 0
@@ -185,7 +193,7 @@ extension EditCarAlertController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch textField {
-        case yearOfIssueTextField, bodyTypeTextField:
+        case yearOfIssueTextField, bodyTextField:
             return false
         default:
             return true
@@ -197,9 +205,9 @@ extension EditCarAlertController: UITextFieldDelegate {
         case yearOfIssueTextField:
             let row = yearOfIssuePickerView.selectedRow(inComponent: 0)
             textField.text = getPickerViewTitle(yearOfIssuePickerView, forRow: row)
-        case bodyTypeTextField:
-            let row = bodyTypePickerView.selectedRow(inComponent: 0)
-            textField.text = getPickerViewTitle(bodyTypePickerView, forRow: row)
+        case bodyTextField:
+            let row = bodyPickerView.selectedRow(inComponent: 0)
+            textField.text = getPickerViewTitle(bodyPickerView, forRow: row)
         default:
             break
         }
