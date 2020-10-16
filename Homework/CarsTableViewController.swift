@@ -13,6 +13,24 @@ class CarsTableViewController: UITableViewController {
     private let cellReuseId = "CarCell"
     private let editCarAlertController = EditCarAlertController()
     
+    private var backgroundViewLabel: UILabel?
+    
+    private var filteredBody: Body? {
+        didSet {
+            tableView.reloadData()
+            updateEmptyViewAndDeleteButtonVisibility(animated: true)
+            updateBackgroundViewLabelText()
+        }
+    }
+    
+    private var cars: [Car] {
+        let allCars = CarsDataSource.shared.cars
+        if let body = filteredBody {
+            return allCars.filter { $0.body == body }
+        }
+        return allCars
+    }
+    
     private lazy var deleteBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(
             barButtonSystemItem: .trash,
@@ -40,7 +58,14 @@ class CarsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         setupTableViewBackgroundView()
+        updateBackgroundViewLabelText()
         updateEmptyViewAndDeleteButtonVisibility(animated: false)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let bodyFilterVC = segue.destination as? BodyFilterViewController else { return }
+        bodyFilterVC.delegate = self
+        bodyFilterVC.selectedBody = filteredBody
     }
     
     private func setupTableViewBackgroundView() {
@@ -50,7 +75,6 @@ class CarsTableViewController: UITableViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.alpha = 0.5
-        label.text = "Нет автомобилей"
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         NSLayoutConstraint.activate([
@@ -59,6 +83,11 @@ class CarsTableViewController: UITableViewController {
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32)
         ])
         tableView.backgroundView = view
+        backgroundViewLabel = label
+    }
+    
+    private func updateBackgroundViewLabelText() {
+        backgroundViewLabel?.text = filteredBody == nil ? "Нет автомобилей" : "Нет автомобилей с выбранным типом кузова"
     }
     
     @objc
@@ -71,9 +100,9 @@ class CarsTableViewController: UITableViewController {
     private func updateEmptyViewAndDeleteButtonVisibility(animated: Bool) {
         let duration = animated ? 0.5 : 0
         UIView.animate(withDuration: duration) {
-            self.tableView.backgroundView?.alpha = CarsDataSource.shared.cars.isEmpty ? 1 : 0
+            self.tableView.backgroundView?.alpha = self.cars.isEmpty ? 1 : 0
         }
-        if CarsDataSource.shared.cars.isEmpty {
+        if cars.isEmpty {
             navigationItem.leftBarButtonItem = nil
             DispatchQueue.main.async {
                 self.tableView.isEditing = false
@@ -84,12 +113,12 @@ class CarsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CarsDataSource.shared.cars.count
+        return cars.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
-        let car = CarsDataSource.shared.cars[indexPath.row]
+        let car = cars[indexPath.row]
         var yearOfIssueString: String?
         if let yearOfIssue = car.yearOfIssue { yearOfIssueString = String(yearOfIssue) }
         var cellText = """
@@ -122,9 +151,18 @@ class CarsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        CarsDataSource.shared.cars.remove(at: indexPath.row)
+        let carToRemove = cars[indexPath.row]
+        CarsDataSource.shared.cars.removeAll { $0 == carToRemove }
         tableView.deleteRows(at: [indexPath], with: .fade)
         updateEmptyViewAndDeleteButtonVisibility(animated: true)
+    }
+    
+}
+
+extension CarsTableViewController: BodyFilterViewControllerDelegate {
+    
+    func bodyFilterViewControllerDidSetNewBody(_ body: Body?) {
+        filteredBody = body
     }
     
 }
