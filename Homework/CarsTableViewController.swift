@@ -152,7 +152,7 @@ class CarsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         let carToRemove = cars[indexPath.row]
-        CarsDataSource.shared.cars.removeAll { $0 == carToRemove }
+        CarsDataSource.shared.removeCar(carToRemove)
         tableView.deleteRows(at: [indexPath], with: .fade)
         updateEmptyViewAndDeleteButtonVisibility(animated: true)
     }

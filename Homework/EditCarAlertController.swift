@@ -77,9 +77,9 @@ class EditCarAlertController: NSObject {
             carNumber: carNumber
         )
         if let index = editingCarIndex {
-            CarsDataSource.shared.cars[index] = car
+            CarsDataSource.shared.replaceCar(byIndex: index, with: car)
         } else {
-            CarsDataSource.shared.cars.append(car)
+            CarsDataSource.shared.addCar(car)
         }
     }
     
