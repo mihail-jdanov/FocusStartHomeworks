@@ -69,18 +69,14 @@ class EditCarAlertController: NSObject {
         let yearOfIssue = CarsDataSource.shared.yearOfIssuePossibleValues[yearOfIssueIndex]
         var carNumber = carNumberTextField?.text?.trimmingCharacters(in: .whitespaces)
         if carNumber?.isEmpty == true { carNumber = nil }
-        let car = Car(
-            manufacturer: manufacturer,
+        CarsDataSource.shared.addCar(
+            withManufacturer: manufacturer,
             model: model,
             body: body,
             yearOfIssue: yearOfIssue,
-            carNumber: carNumber
+            carNumber: carNumber,
+            replacingCarWithIndex: editingCarIndex
         )
-        if let index = editingCarIndex {
-            CarsDataSource.shared.replaceCar(byIndex: index, with: car)
-        } else {
-            CarsDataSource.shared.addCar(car)
-        }
     }
     
     private func fillTextFieldsForCarEditing(editingCarIndex index: Int?) {

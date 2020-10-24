@@ -29,14 +29,21 @@ final class CarsDataSource {
         return Body.allCases
     }
     
-    func addCar(_ car: Car) {
-        if cars.contains(car) { return }
-        cars.append(car)
-    }
-    
-    func replaceCar(byIndex index: Int, with car: Car) {
-        guard index >= 0 && index < cars.count else { return }
-        cars[index] = car
+    func addCar(withManufacturer manufacturer: String, model: String, body: Body,
+                yearOfIssue: Int?, carNumber: String?, replacingCarWithIndex index: Int? = nil) {
+        let car = Car(
+            manufacturer: manufacturer,
+            model: model,
+            body: body,
+            yearOfIssue: yearOfIssue,
+            carNumber: carNumber
+        )
+        if let index = index {
+            guard index >= 0 && index < cars.count else { return }
+            cars[index] = car
+        } else {
+            cars.append(car)
+        }
     }
     
     func removeCar(_ car: Car) {
