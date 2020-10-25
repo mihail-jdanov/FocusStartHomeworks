@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aM0-Hg-J2r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="3u3-s8-E2D">
+            <objects>
+                <navigationController id="aM0-Hg-J2r" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mWu-OR-FEi">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bov-cx-gSI" kind="relationship" relationship="rootViewController" id="lc0-Rz-a9X"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CzP-c0-1A7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742" y="133"/>
+        </scene>
+        <!--Автомобили-->
+        <scene sceneID="Kr3-lc-hQO">
+            <objects>
+                <tableViewController id="bov-cx-gSI" customClass="CarsTableViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Ac-9R-rrb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CarCell" textLabel="dRi-h9-eYc" style="IBUITableViewCellStyleDefault" id="aAa-dr-v7f">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aAa-dr-v7f" id="TZo-Gk-oIC">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dRi-h9-eYc">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bov-cx-gSI" id="muo-9o-qfW"/>
+                            <outlet property="delegate" destination="bov-cx-gSI" id="eVO-RU-rKa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Автомобили" id="V7A-PH-BcP">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="RrP-QK-0Xv">
+                                <connections>
+                                    <action selector="addCarButtonAction:" destination="bov-cx-gSI" id="iB4-U0-gjV"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="FilterIcon" id="a5a-z7-bdJ">
+                                <connections>
+                                    <segue destination="rN9-hG-Vht" kind="presentation" id="HdQ-qn-GYM"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AQe-va-sjQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="133"/>
+        </scene>
+        <!--Body Filter View Controller-->
+        <scene sceneID="iqh-Xh-euB">
+            <objects>
+                <viewController id="rN9-hG-Vht" customClass="BodyFilterViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TFr-N7-GKz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iir-9c-KUD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Тип кузова" id="S7A-CQ-P5L">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="LzC-4V-Tup">
+                                            <connections>
+                                                <action selector="cancelButtonAction:" destination="rN9-hG-Vht" id="pxd-5a-4ld"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Сброс" id="OEg-zY-CdM">
+                                            <connections>
+                                                <action selector="resetButtonAction:" destination="rN9-hG-Vht" id="B2k-Xr-ehT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GiD-Pj-5Sh">
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BodyCell" textLabel="i6f-DF-KuH" style="IBUITableViewCellStyleDefault" id="LSX-QC-mLJ">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LSX-QC-mLJ" id="HAU-zw-M9w">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i6f-DF-KuH">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="iir-9c-KUD" firstAttribute="leading" secondItem="TFr-N7-GKz" secondAttribute="leading" id="3ZA-am-ME8"/>
+                            <constraint firstItem="GiD-Pj-5Sh" firstAttribute="leading" secondItem="TFr-N7-GKz" secondAttribute="leading" id="8OH-jg-wJ1"/>
+                            <constraint firstItem="iir-9c-KUD" firstAttribute="top" secondItem="dFa-zD-dJG" secondAttribute="top" id="J6o-0G-fog"/>
+                            <constraint firstItem="dFa-zD-dJG" firstAttribute="trailing" secondItem="iir-9c-KUD" secondAttribute="trailing" id="WBs-lD-tb1"/>
+                            <constraint firstAttribute="trailing" secondItem="GiD-Pj-5Sh" secondAttribute="trailing" id="ZGV-1P-bd5"/>
+                            <constraint firstItem="GiD-Pj-5Sh" firstAttribute="top" secondItem="iir-9c-KUD" secondAttribute="bottom" id="hgd-69-1Hy"/>
+                            <constraint firstAttribute="bottom" secondItem="GiD-Pj-5Sh" secondAttribute="bottom" id="k3D-Yk-KnT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dFa-zD-dJG"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="GiD-Pj-5Sh" id="79p-4Y-7bm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DdN-0X-kxp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1013" y="133"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="FilterIcon" width="25" height="25"/>
+    </resources>
+</document>
