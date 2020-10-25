@@ -42,15 +42,17 @@ class ThreadSafeArray<Element> {
         }
     }
     
-    subscript(index: Int) -> Element {
+    subscript(index: Int) -> Element? {
         get {
             var value: Element?
             self.queue.sync {
+                guard index >= 0 && index < self.array.count else { return }
                 value = self.array[index]
             }
-            return value ?? array[0]
+            return value
         }
         set {
+            guard let newValue = newValue else { return }
             self.queue.async(flags: .barrier) {
                 self.array[index] = newValue
             }
