@@ -8,5 +8,26 @@
 
 import Foundation
 
-print("Hello, World!")
+var safeArray = ThreadSafeArray<Int>()
 
+let group = DispatchGroup()
+let queue = DispatchQueue.global(qos: .userInteractive)
+
+group.enter()
+queue.async {
+    for index in 0 ..< 1000 {
+        safeArray.append(index)
+    }
+    group.leave()
+}
+
+group.enter()
+queue.async {
+    for index in 0 ..< 1000 {
+        safeArray.append(index)
+    }
+    group.leave()
+}
+
+group.wait()
+print("Элементов в потокобезопасном массиве: \(safeArray.count)")
