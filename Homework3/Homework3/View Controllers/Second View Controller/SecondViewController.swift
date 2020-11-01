@@ -10,6 +10,8 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
+    // MARK: - Life cycle
+    
     override func loadView() {
         view = SecondView()
     }

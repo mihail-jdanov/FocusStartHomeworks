@@ -10,6 +10,8 @@ import UIKit
 
 class ThirdViewController: UIViewController {
 
+    // MARK: - Life cycle
+    
     override func loadView() {
         view = ThirdView()
     }

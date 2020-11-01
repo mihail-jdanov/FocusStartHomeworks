@@ -9,6 +9,8 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    
+    // MARK: - Life cycle
 
     override func loadView() {
         view = FirstView()

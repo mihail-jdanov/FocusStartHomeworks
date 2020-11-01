@@ -9,11 +9,15 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+    
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllers()
     }
+    
+    // MARK: - Tab Bar setup
     
     private func setupViewControllers() {
         let firstViewController = FirstViewController()
