@@ -10,7 +10,7 @@ import UIKit
 
 class FirstView: UIView {
     
-    // MARK: - Properties
+    // MARK: - Views
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()

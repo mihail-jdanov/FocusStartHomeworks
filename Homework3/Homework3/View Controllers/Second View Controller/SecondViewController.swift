@@ -12,6 +12,10 @@ class SecondViewController: UIViewController {
 
     // MARK: - Life cycle
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
     override func loadView() {
         view = SecondView()
     }

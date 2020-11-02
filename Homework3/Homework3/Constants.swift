@@ -18,5 +18,6 @@ enum Spacings {
 enum Images {
     
     static let leo = UIImage(named: "Leo") ?? UIImage()
+    static let sunrise = UIImage(named: "Sunrise") ?? UIImage()
     
 }
