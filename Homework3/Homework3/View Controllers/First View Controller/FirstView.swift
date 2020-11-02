@@ -46,14 +46,14 @@ class FirstView: UIView {
     
     private let firstButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue
+        button.backgroundColor = .systemBlue
         button.setTitle("First button", for: .normal)
         return button
     }()
     
     private let secondButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .gray
+        button.backgroundColor = .systemGray
         button.setTitle("Second button", for: .normal)
         button.layer.cornerRadius = 8
         return button

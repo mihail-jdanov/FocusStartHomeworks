@@ -12,8 +12,12 @@ class ThirdViewController: UIViewController {
 
     // MARK: - Life cycle
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
     override func loadView() {
-        view = ThirdView()
+        view = ThirdView(parentViewController: self)
     }
 
 }
