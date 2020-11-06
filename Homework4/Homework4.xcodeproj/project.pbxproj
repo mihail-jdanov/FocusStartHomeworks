@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		879EFD702555C8EB00A32D2F /* UILayoutPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879EFD6F2555C8EB00A32D2F /* UILayoutPriority.swift */; };
 		87A71F3D25528AE500008F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F3C25528AE500008F00 /* AppDelegate.swift */; };
 		87A71F3F25528AE500008F00 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F3E25528AE500008F00 /* SceneDelegate.swift */; };
 		87A71F4625528AE600008F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87A71F4525528AE600008F00 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		879EFD6F2555C8EB00A32D2F /* UILayoutPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayoutPriority.swift; sourceTree = "<group>"; };
 		87A71F3925528AE500008F00 /* Homework4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A71F3C25528AE500008F00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87A71F3E25528AE500008F00 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				87A71F692552A0AF00008F00 /* NSObject.swift */,
 				87A71F722552A6D200008F00 /* UIView.swift */,
+				879EFD6F2555C8EB00A32D2F /* UILayoutPriority.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				87A71F6325529C1E00008F00 /* ArticlesProvider.swift in Sources */,
 				87A71F6625529F2A00008F00 /* MenuTableViewCell.swift in Sources */,
 				87A71F3F25528AE500008F00 /* SceneDelegate.swift in Sources */,
+				879EFD702555C8EB00A32D2F /* UILayoutPriority.swift in Sources */,
 				87A71F762552A84400008F00 /* Constants.swift in Sources */,
 				87A71F582552940B00008F00 /* SplitViewController.swift in Sources */,
 				87A71F5C255294C700008F00 /* MenuViewController.swift in Sources */,

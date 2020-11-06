@@ -11,14 +11,14 @@ import UIKit
 extension UIView {
     
     @discardableResult
-    func pin(_ firstAttribute: NSLayoutConstraint.Attribute, to secondAttribute: NSLayoutConstraint.Attribute = .notAnAttribute,
-             of item: Any? = nil, constant: CGFloat = 0, multiplier: CGFloat = 1,
-             activate isActive: Bool = true) -> NSLayoutConstraint {
+    func pin(_ attribute: NSLayoutConstraint.Attribute, to secondAttribute: NSLayoutConstraint.Attribute = .notAnAttribute,
+             of item: Any? = nil, relation: NSLayoutConstraint.Relation = .equal, constant: CGFloat = 0,
+             multiplier: CGFloat = 1, activate isActive: Bool = true) -> NSLayoutConstraint {
         self.translatesAutoresizingMaskIntoConstraints = false
         let constraint = NSLayoutConstraint(
             item: self,
-            attribute: firstAttribute,
-            relatedBy: .equal,
+            attribute: attribute,
+            relatedBy: relation,
             toItem: item,
             attribute: secondAttribute,
             multiplier: multiplier,

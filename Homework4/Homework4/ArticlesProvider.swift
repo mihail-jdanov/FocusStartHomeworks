@@ -13,7 +13,7 @@ class ArticlesProvider {
     static let data: [Article] = [
         .init(
             title: "Заголовок",
-            description: "Текст текст",
+            description: "Текст текст jdf djfg jdfg bjdfj gbdfbjg jdfg bjdbfjg jdfgj bdfjbg djfg bjdg b",
             date: Date(timeIntervalSince1970: 1604478390),
             text: "Какой-то текст",
             firstImageName: "Article1-1",
@@ -21,6 +21,30 @@ class ArticlesProvider {
         ),
         .init(
             title: "Заголовок 2",
+            description: nil,
+            date: Date(timeIntervalSince1970: 1604478390),
+            text: "Какой-то текст",
+            firstImageName: "Article1-1",
+            secondImageName: "Article1-2"
+        ),
+        .init(
+            title: "Заголовок 3",
+            description: "Текст текст jdf djfg jdfg bjdfj gbdfbjg jdfg bjdbfjg jdfgj bdfjbg djfg bjdg b",
+            date: nil,
+            text: "Какой-то текст",
+            firstImageName: "Article1-1",
+            secondImageName: "Article1-2"
+        ),
+        .init(
+            title: "Заголовок 4",
+            description: nil,
+            date: nil,
+            text: "Какой-то текст",
+            firstImageName: "Article1-1",
+            secondImageName: "Article1-2"
+        ),
+        .init(
+            title: "Заголовок 5",
             description: "Много текста",
             date: Date(timeIntervalSince1970: 1604514515),
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore "

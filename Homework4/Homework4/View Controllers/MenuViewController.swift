@@ -56,7 +56,8 @@ extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.className, for: indexPath)
         guard let cell = tableViewCell as? MenuTableViewCell else { return tableViewCell }
-        
+        let data = tableViewData[indexPath.row]
+        cell.configure(withTitle: data.title, description: data.description, timeText: data.timeString)
         return cell
     }
     
