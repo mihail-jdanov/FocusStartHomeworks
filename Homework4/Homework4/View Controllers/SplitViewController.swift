@@ -12,18 +12,26 @@ class SplitViewController: UISplitViewController {
     
     // MARK: - View controllers
     
-    private lazy var mainNavigationController: UINavigationController = {
+    private let masterViewController = MasterViewController()
+    private let detailViewController = DetailViewController()
+    
+    private lazy var masterNavigationController: UINavigationController = {
         let navigationController = UINavigationController()
-        navigationController.viewControllers = [menuViewController]
+        navigationController.viewControllers = [masterViewController]
         return navigationController
     }()
     
-    private let menuViewController = MenuViewController()
+    private lazy var detailNavigationController: UINavigationController = {
+        let navigationController = UINavigationController()
+        navigationController.viewControllers = [detailViewController]
+        return navigationController
+    }()
     
     // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegate = self
         setup()
     }
     
@@ -31,7 +39,19 @@ class SplitViewController: UISplitViewController {
     
     private func setup() {
         preferredDisplayMode = .allVisible
-        viewControllers = [mainNavigationController]
+        masterViewController.delegate = detailViewController
+        detailViewController.delegate = masterViewController
+        viewControllers = [masterNavigationController, detailNavigationController]
     }
+    
+}
 
+extension SplitViewController: UISplitViewControllerDelegate {
+    
+    // MARK: - UISplitViewControllerDelegate methods
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true
+    }
+    
 }

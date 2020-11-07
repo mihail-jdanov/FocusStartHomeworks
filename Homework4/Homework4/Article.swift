@@ -19,8 +19,8 @@ struct Article {
     
     let title: String
     let description: String?
+    let defaultDescription = "У этой статьи нет описания."
     let date: Date?
-    let text: String
     let firstImageName: String
     let secondImageName: String
     

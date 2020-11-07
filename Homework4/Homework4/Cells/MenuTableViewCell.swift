@@ -36,21 +36,23 @@ class MenuTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.textAlignment = .justified
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.textAlignment = .justified
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
 
