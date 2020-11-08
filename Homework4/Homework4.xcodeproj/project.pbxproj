@@ -10,6 +10,7 @@
 		87821132255665CF0020DAA9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87821131255665CF0020DAA9 /* DetailViewController.swift */; };
 		878211362556661F0020DAA9 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878211352556661F0020DAA9 /* DetailView.swift */; };
 		879EFD702555C8EB00A32D2F /* UILayoutPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879EFD6F2555C8EB00A32D2F /* UILayoutPriority.swift */; };
+		879FDD2F2557BD54000EA4C1 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879FDD2E2557BD54000EA4C1 /* DateFormatter.swift */; };
 		87A71F3D25528AE500008F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F3C25528AE500008F00 /* AppDelegate.swift */; };
 		87A71F3F25528AE500008F00 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F3E25528AE500008F00 /* SceneDelegate.swift */; };
 		87A71F4625528AE600008F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87A71F4525528AE600008F00 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		87821131255665CF0020DAA9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		878211352556661F0020DAA9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		879EFD6F2555C8EB00A32D2F /* UILayoutPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILayoutPriority.swift; sourceTree = "<group>"; };
+		879FDD2E2557BD54000EA4C1 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		87A71F3925528AE500008F00 /* Homework4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A71F3C25528AE500008F00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87A71F3E25528AE500008F00 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				87A71F692552A0AF00008F00 /* NSObject.swift */,
 				87A71F722552A6D200008F00 /* UIView.swift */,
 				879EFD6F2555C8EB00A32D2F /* UILayoutPriority.swift */,
+				879FDD2E2557BD54000EA4C1 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				879EFD702555C8EB00A32D2F /* UILayoutPriority.swift in Sources */,
 				878211362556661F0020DAA9 /* DetailView.swift in Sources */,
 				87A71F762552A84400008F00 /* Constants.swift in Sources */,
+				879FDD2F2557BD54000EA4C1 /* DateFormatter.swift in Sources */,
 				87A71F582552940B00008F00 /* SplitViewController.swift in Sources */,
 				87A71F5C255294C700008F00 /* MasterViewController.swift in Sources */,
 				87A71F732552A6D200008F00 /* UIView.swift in Sources */,

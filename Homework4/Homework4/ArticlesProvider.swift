@@ -10,7 +10,7 @@ import Foundation
 
 class ArticlesProvider {
     
-    static let articles: [Article] = [
+    let articles: [Article] = [
         .init(
             title: "Заголовок",
             description: "Какое-то описание статьи.",

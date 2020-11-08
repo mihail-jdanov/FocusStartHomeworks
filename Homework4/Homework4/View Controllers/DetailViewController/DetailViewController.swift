@@ -61,7 +61,7 @@ class DetailViewController: UIViewController {
     
     private func showArticle(withIndex index: Int) {
         isArticleShown = true
-        let article = ArticlesProvider.articles[index]
+        let article = ArticlesProvider().articles[index]
         title = article.title
         let firstImage = UIImage(named: article.firstImageName)
         let secondImage = UIImage(named: article.secondImageName)

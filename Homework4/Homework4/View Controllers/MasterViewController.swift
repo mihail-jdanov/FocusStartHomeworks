@@ -21,7 +21,7 @@ class MasterViewController: UIViewController {
     weak var delegate: MasterViewControllerDelegate?
     
     private var tableViewData: [Article] {
-        return ArticlesProvider.articles
+        return ArticlesProvider().articles
     }
     
     private var lastSelectedRowIndexPath: IndexPath?
@@ -43,7 +43,7 @@ class MasterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Домашнее задание №4"
-        layoutViews()
+        layoutTableView()
     }
     
 }
@@ -105,10 +105,6 @@ extension MasterViewController: DetailViewControllerDelegate {
 private extension MasterViewController {
     
     // MARK: - Layout
-    
-    func layoutViews() {
-        layoutTableView()
-    }
     
     func layoutTableView() {
         view.addSubview(tableView)

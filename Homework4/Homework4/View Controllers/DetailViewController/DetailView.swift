@@ -10,6 +10,12 @@ import UIKit
 
 class DetailView: UIView {
     
+    // MARK: - Properties
+    
+    private let descriptionFontSize: CGFloat = 14
+    private let imagesCornerRadius: CGFloat = 12
+    private let imagesShadowSettings = ShadowSettings(radius: 8, opacity: 0.5)
+    
     // MARK: - Views
     
     private let scrollView: UIScrollView = {
@@ -24,25 +30,25 @@ class DetailView: UIView {
         return view
     }()
     
-    private let descriptionLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .justified
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: descriptionFontSize)
         return label
     }()
     
     private lazy var firstImageView: AspectFitCustomImageView = {
         let customImageView = AspectFitCustomImageView()
-        customImageView.cornerRadius = 12
-        customImageView.shadow = ShadowSettings(radius: 8, opacity: 0.5)
+        customImageView.cornerRadius = imagesCornerRadius
+        customImageView.shadow = imagesShadowSettings
         return customImageView
     }()
     
     private lazy var secondImageView: AspectFitCustomImageView = {
         let customImageView = AspectFitCustomImageView()
-        customImageView.cornerRadius = 12
-        customImageView.shadow = ShadowSettings(radius: 8, opacity: 0.5)
+        customImageView.cornerRadius = imagesCornerRadius
+        customImageView.shadow = imagesShadowSettings
         return customImageView
     }()
     
