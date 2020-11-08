@@ -124,12 +124,17 @@ extension AspectFitCustomImageView {
     // MARK: - Layout
     
     func layoutViews() {
+        addSubviews()
         layoutShadowView()
         layoutImageView()
     }
     
-    func layoutShadowView() {
+    func addSubviews() {
         addSubview(shadowView)
+        addSubview(imageView)
+    }
+    
+    func layoutShadowView() {
         shadowView.pin(.leading, to: .leading, of: self)
         shadowView.pin(.trailing, to: .trailing, of: self)
         shadowView.pin(.top, to: .top, of: self)
@@ -137,7 +142,6 @@ extension AspectFitCustomImageView {
     }
     
     func layoutImageView() {
-        addSubview(imageView)
         imageView.pin(.leading, to: .leading, of: self)
         imageView.pin(.trailing, to: .trailing, of: self)
         imageView.pin(.top, to: .top, of: self)

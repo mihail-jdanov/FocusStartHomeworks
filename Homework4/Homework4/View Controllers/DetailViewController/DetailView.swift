@@ -80,6 +80,7 @@ private extension DetailView {
     // MARK: - Layout
     
     func layoutViews() {
+        addSubviews()
         layoutScrollView()
         layoutScrollableContentView()
         layoutDescriptionLabel()
@@ -87,8 +88,15 @@ private extension DetailView {
         layoutSecondImageView()
     }
     
-    func layoutScrollView() {
+    func addSubviews() {
         addSubview(scrollView)
+        scrollView.addSubview(scrollableContentView)
+        scrollableContentView.addSubview(descriptionLabel)
+        scrollableContentView.addSubview(firstImageView)
+        scrollableContentView.addSubview(secondImageView)
+    }
+    
+    func layoutScrollView() {
         scrollView.pin(.leading, to: .leading, of: self)
         scrollView.pin(.trailing, to: .trailing, of: self)
         scrollView.pin(.top, to: .top, of: self)
@@ -96,7 +104,6 @@ private extension DetailView {
     }
     
     func layoutScrollableContentView() {
-        scrollView.addSubview(scrollableContentView)
         scrollableContentView.pin(.leading, to: .leading, of: scrollView)
         scrollableContentView.pin(.trailing, to: .trailing, of: scrollView)
         scrollableContentView.pin(.top, to: .top, of: scrollView)
@@ -105,14 +112,12 @@ private extension DetailView {
     }
     
     func layoutDescriptionLabel() {
-        scrollableContentView.addSubview(descriptionLabel)
         descriptionLabel.pin(.leading, to: .leading, of: scrollableContentView, constant: Spacings.standard)
         descriptionLabel.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Spacings.standard)
         descriptionLabel.pin(.top, to: .top, of: scrollableContentView, constant: Spacings.standard)
     }
     
     func layoutFirstImageView() {
-        scrollableContentView.addSubview(firstImageView)
         firstImageView.pin(.leading, to: .leading, of: scrollableContentView, constant: Spacings.large)
         firstImageView.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Spacings.large)
         firstImageView.pin(.top, to: .bottom, of: descriptionLabel, constant: Spacings.large)
@@ -120,7 +125,6 @@ private extension DetailView {
     }
     
     func layoutSecondImageView() {
-        scrollableContentView.addSubview(secondImageView)
         secondImageView.pin(.leading, to: .leading, of: scrollableContentView, constant: Spacings.large)
         secondImageView.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Spacings.large)
         secondImageView.pin(.top, to: .bottom, of: firstImageView, constant: Spacings.large)

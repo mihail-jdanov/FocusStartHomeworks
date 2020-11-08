@@ -83,20 +83,25 @@ private extension MenuTableViewCell {
     // MARK: - Layout
     
     func layoutViews() {
+        addSubviews()
         layoutTitleLabel()
         layoutDescriptionLabel()
         layoutTimeLabel()
     }
     
-    func layoutTitleLabel() {
+    func addSubviews() {
         addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        addSubview(timeLabel)
+    }
+    
+    func layoutTitleLabel() {
         titleLabel.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Spacings.standard)
         titleLabel.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Spacings.standard)
         titleLabel.pin(.top, to: .top, of: safeAreaLayoutGuide, constant: Spacings.standard)
     }
     
     func layoutDescriptionLabel() {
-        addSubview(descriptionLabel)
         descriptionLabel.pin(.leading, to: .leading, of: titleLabel)
         descriptionLabel.pin(.top, to: .bottom, of: titleLabel, constant: Spacings.small)
         descriptionLabel.pin(.bottom, to: .bottom, of: safeAreaLayoutGuide, constant: -Spacings.standard)
@@ -105,7 +110,6 @@ private extension MenuTableViewCell {
     }
     
     func layoutTimeLabel() {
-        addSubview(timeLabel)
         timeLabel.pin(.leading, to: .trailing, of: descriptionLabel, constant: Spacings.standard)
             .priority = .preRequired
         timeLabel.pin(.trailing, to: .trailing, of: titleLabel)
