@@ -119,7 +119,8 @@ class AspectFitCustomImageView: UIView {
     }
     
 }
-extension AspectFitCustomImageView {
+
+private extension AspectFitCustomImageView {
     
     // MARK: - Layout
     

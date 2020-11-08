@@ -23,7 +23,7 @@
 		87A71F6A2552A0AF00008F00 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F692552A0AF00008F00 /* NSObject.swift */; };
 		87A71F732552A6D200008F00 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F722552A6D200008F00 /* UIView.swift */; };
 		87A71F762552A84400008F00 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A71F752552A84400008F00 /* Constants.swift */; };
-		87E8F2D42556E777002FE8E8 /* ShadowRoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8F2D32556E777002FE8E8 /* ShadowRoundedImageView.swift */; };
+		87E8F2D42556E777002FE8E8 /* AspectFitCustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8F2D32556E777002FE8E8 /* AspectFitCustomImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +45,7 @@
 		87A71F692552A0AF00008F00 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		87A71F722552A6D200008F00 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		87A71F752552A84400008F00 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		87E8F2D32556E777002FE8E8 /* ShadowRoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRoundedImageView.swift; sourceTree = "<group>"; };
+		87E8F2D32556E777002FE8E8 /* AspectFitCustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectFitCustomImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +127,7 @@
 		87E8F2D7255718A9002FE8E8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				87E8F2D32556E777002FE8E8 /* ShadowRoundedImageView.swift */,
+				87E8F2D32556E777002FE8E8 /* AspectFitCustomImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 				87A71F582552940B00008F00 /* SplitViewController.swift in Sources */,
 				87A71F5C255294C700008F00 /* MasterViewController.swift in Sources */,
 				87A71F732552A6D200008F00 /* UIView.swift in Sources */,
-				87E8F2D42556E777002FE8E8 /* ShadowRoundedImageView.swift in Sources */,
+				87E8F2D42556E777002FE8E8 /* AspectFitCustomImageView.swift in Sources */,
 				87A71F602552974300008F00 /* Article.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
