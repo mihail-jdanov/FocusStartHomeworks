@@ -10,11 +10,16 @@ import UIKit
 
 class ThirdView: UIView {
     
+    private enum Constants {
+        static let smallSpacing: CGFloat = 8
+        static let standardSpacing: CGFloat = 16
+        static let enterButtonWidth: CGFloat = 200
+        static let enterButtonHeight: CGFloat = 35
+    }
+    
     // MARK: - Properties
     
     weak var parentViewController: UIViewController?
-    
-    private let enterButtonDefaultBottomSpacing = Spacings.standard
     
     private var enterButtonBottomConstraint: NSLayoutConstraint?
     
@@ -50,7 +55,7 @@ class ThirdView: UIView {
         self.parentViewController = parentViewController
         super.init(frame: frame)
         backgroundColor = UIColor(hex: "#ffda75")
-        layoutViews()
+        configureSubviews()
         addKeyboardObservers()
     }
     
@@ -62,77 +67,83 @@ class ThirdView: UIView {
         super.touchesBegan(touches, with: event)
         endEditing(true)
     }
-    
-    // MARK: - Private methods
-    
-    private func addKeyboardObservers() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(_:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-    
-    @objc
-    private func keyboardWillShow(_ notification: NSNotification) {
-        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        let tabBarHeight = parentViewController?.tabBarController?.tabBar.frame.height ?? 0
-        let spacing = keyboardSize.height - tabBarHeight + enterButtonDefaultBottomSpacing
-        setEnterButtonBottomSpace(-spacing)
-    }
-    
-    @objc
-    private func keyboardWillHide(_ notification: NSNotification) {
-        setEnterButtonBottomSpace(-enterButtonDefaultBottomSpacing)
-    }
-    
-    private func setEnterButtonBottomSpace(_ spacing: CGFloat) {
-        UIView.animate(withDuration: 0.25) {
-            self.enterButtonBottomConstraint?.constant = spacing
-            self.layoutIfNeeded()
-        }
-    }
 
 }
 
 private extension ThirdView {
     
-    // MARK: - Layout
+    // MARK: - Private methods
     
-    func layoutViews() {
-        layoutLoginTextField()
-        layoutPassswordTextField()
-        layoutEnterButton()
+    func addKeyboardObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
-    func layoutLoginTextField() {
+    @objc
+    func keyboardWillShow(_ notification: NSNotification) {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let tabBarHeight = parentViewController?.tabBarController?.tabBar.frame.height ?? 0
+        let spacing = keyboardSize.height - tabBarHeight + Constants.standardSpacing
+        setEnterButtonBottomSpace(-spacing)
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: NSNotification) {
+        setEnterButtonBottomSpace(-Constants.standardSpacing)
+    }
+    
+    func setEnterButtonBottomSpace(_ spacing: CGFloat) {
+        UIView.animate(withDuration: 0.25) {
+            self.enterButtonBottomConstraint?.constant = spacing
+            self.layoutIfNeeded()
+        }
+    }
+    
+}
+
+private extension ThirdView {
+    
+    // MARK: - Views configuration
+    
+    func configureSubviews() {
+        addSubviews()
+        configureLoginTextField()
+        configurePassswordTextField()
+        configureEnterButton()
+    }
+    
+    func addSubviews() {
         addSubview(loginTextField)
-        loginTextField.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Spacings.standard)
-        loginTextField.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Spacings.standard)
+        addSubview(passwordTextField)
+        addSubview(enterButton)
+    }
+    
+    func configureLoginTextField() {
+        loginTextField.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Constants.standardSpacing)
+        loginTextField.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Constants.standardSpacing)
         loginTextField.pin(.centerY, to: .centerY, of: safeAreaLayoutGuide, multiplier: 0.3)
     }
     
-    func layoutPassswordTextField() {
-        addSubview(passwordTextField)
-        passwordTextField.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Spacings.standard)
-        passwordTextField.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Spacings.standard)
+    func configurePassswordTextField() {
+        passwordTextField.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Constants.standardSpacing)
+        passwordTextField.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Constants.standardSpacing)
         passwordTextField.pin(.centerY, to: .centerY, of: safeAreaLayoutGuide, multiplier: 0.55)
     }
     
-    func layoutEnterButton() {
-        addSubview(enterButton)
+    func configureEnterButton() {
         enterButton.pin(.centerX, to: .centerX, of: safeAreaLayoutGuide)
-        enterButton.pin(.width, constant: 200)
-        enterButton.pin(.height, constant: 35)
-        enterButtonBottomConstraint = enterButton.pin(.bottom, to: .bottom,
-            of: safeAreaLayoutGuide, constant: -enterButtonDefaultBottomSpacing)
+        enterButton.pin(.width, constant: Constants.enterButtonWidth)
+        enterButton.pin(.height, constant: Constants.enterButtonHeight)
+        enterButtonBottomConstraint = enterButton.pin(.bottom,
+                                                      to: .bottom,
+                                                      of: safeAreaLayoutGuide,
+                                                      constant: -Constants.standardSpacing)
     }
     
 }

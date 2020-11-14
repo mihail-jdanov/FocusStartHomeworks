@@ -8,13 +8,6 @@
 
 import UIKit
 
-enum Spacings {
-    
-    static let small: CGFloat = 8
-    static let standard: CGFloat = 16
-    
-}
-
 enum Images {
     
     static let leo = UIImage(named: "Leo") ?? UIImage()

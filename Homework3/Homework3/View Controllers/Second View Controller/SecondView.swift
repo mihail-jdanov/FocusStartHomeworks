@@ -10,13 +10,22 @@ import UIKit
 
 class SecondView: UIView {
     
+    private enum Constants {
+        static let smallSpacing: CGFloat = 8
+        static let standardSpacing: CGFloat = 16
+        static let titleFontSize: CGFloat = 18
+        static let titleNumberOfLines = 0
+        static let textFontSize: CGFloat = 14
+        static let textNumberOfLines = 0
+    }
+    
     // MARK: - Properties
     
     private lazy var compactConstraints: [NSLayoutConstraint] = [
-        imageView.pin(.leading, to: .leading, of: scrollableContentView, constant: Spacings.standard, activate: false),
-        imageView.pin(.top, to: .top, of: scrollableContentView, constant: Spacings.standard, activate: false),
+        imageView.pin(.leading, to: .leading, of: scrollableContentView, constant: Constants.standardSpacing, activate: false),
+        imageView.pin(.top, to: .top, of: scrollableContentView, constant: Constants.standardSpacing, activate: false),
         imageView.pin(.width, to: .width, of: scrollableContentView, multiplier: 0.3, activate: false),
-        titleLabel.pin(.leading, to: .trailing, of: imageView, constant: Spacings.standard, activate: false),
+        titleLabel.pin(.leading, to: .trailing, of: imageView, constant: Constants.standardSpacing, activate: false),
         titleLabel.pin(.top, to: .top, of: imageView, activate: false),
         titleLabel.pin(.bottom, to: .bottom, of: imageView, activate: false)
     ]
@@ -25,8 +34,8 @@ class SecondView: UIView {
         imageView.pin(.leading, to: .leading, of: scrollableContentView, activate: false),
         imageView.pin(.top, to: .top, of: scrollableContentView, activate: false),
         imageView.pin(.trailing, to: .trailing, of: scrollableContentView, activate: false),
-        titleLabel.pin(.leading, to: .leading, of: scrollableContentView, constant: Spacings.standard, activate: false),
-        titleLabel.pin(.top, to: .bottom, of: imageView, constant: Spacings.standard, activate: false)
+        titleLabel.pin(.leading, to: .leading, of: scrollableContentView, constant: Constants.standardSpacing, activate: false),
+        titleLabel.pin(.top, to: .bottom, of: imageView, constant: Constants.standardSpacing, activate: false)
     ]
     
     private let image = Images.sunrise
@@ -48,9 +57,9 @@ class SecondView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: Constants.titleFontSize)
         label.textColor = .black
-        label.numberOfLines = 0
+        label.numberOfLines = Constants.titleNumberOfLines
         label.textAlignment = .center
         label.text = "Lorem ipsum dolor sit amet"
         return label
@@ -58,9 +67,9 @@ class SecondView: UIView {
     
     private let textLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: Constants.textFontSize)
         label.textColor = .darkGray
-        label.numberOfLines = 0
+        label.numberOfLines = Constants.textNumberOfLines
         label.textAlignment = .justified
         let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
             + "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
@@ -87,7 +96,7 @@ class SecondView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        layoutViews()
+        configureSubviews()
         refreshConstraints()
     }
     
@@ -98,7 +107,8 @@ class SecondView: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         guard traitCollection.horizontalSizeClass != previousTraitCollection?.horizontalSizeClass ||
-            traitCollection.verticalSizeClass != previousTraitCollection?.verticalSizeClass else { return }
+            traitCollection.verticalSizeClass != previousTraitCollection?.verticalSizeClass
+            else { return }
         refreshConstraints()
     }
 
@@ -106,7 +116,7 @@ class SecondView: UIView {
 
 private extension SecondView {
     
-    // MARK: - Layout
+    // MARK: - Views configuration
     
     func refreshConstraints() {
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
@@ -119,24 +129,31 @@ private extension SecondView {
         }
     }
     
-    func layoutViews() {
-        layoutScrollView()
-        layoutScrollableContentView()
-        layoutImageView()
-        layoutTitleLabel()
-        layoutTextlabel()
+    func configureSubviews() {
+        addSubviews()
+        configureScrollView()
+        configureScrollableContentView()
+        configureImageView()
+        titleLabel.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Constants.standardSpacing)
+        configureTextlabel()
     }
     
-    func layoutScrollView() {
+    func addSubviews() {
         addSubview(scrollView)
+        scrollView.addSubview(scrollableContentView)
+        scrollableContentView.addSubview(imageView)
+        scrollableContentView.addSubview(titleLabel)
+        scrollableContentView.addSubview(textLabel)
+    }
+    
+    func configureScrollView() {
         scrollView.pin(.leading, to: .leading, of: self)
         scrollView.pin(.trailing, to: .trailing, of: self)
         scrollView.pin(.top, to: .top, of: self)
         scrollView.pin(.bottom, to: .bottom, of: self)
     }
     
-    func layoutScrollableContentView() {
-        scrollView.addSubview(scrollableContentView)
+    func configureScrollableContentView() {
         scrollableContentView.pin(.leading, to: .leading, of: scrollView)
         scrollableContentView.pin(.trailing, to: .trailing, of: scrollView)
         scrollableContentView.pin(.top, to: .top, of: scrollView)
@@ -144,23 +161,16 @@ private extension SecondView {
         scrollableContentView.pin(.width, to: .width, of: safeAreaLayoutGuide)
     }
     
-    func layoutImageView() {
-        scrollableContentView.addSubview(imageView)
+    func configureImageView() {
         let aspectRatio = image.size.width / image.size.height
         imageView.pin(.width, to: .height, of: imageView, multiplier: aspectRatio)
     }
     
-    func layoutTitleLabel() {
-        scrollableContentView.addSubview(titleLabel)
-        titleLabel.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Spacings.standard)
-    }
-    
-    func layoutTextlabel() {
-        scrollableContentView.addSubview(textLabel)
-        textLabel.pin(.leading, to: .leading, of: scrollableContentView, constant: Spacings.standard)
-        textLabel.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Spacings.standard)
-        textLabel.pin(.top, to: .bottom, of: titleLabel, constant: Spacings.standard)
-        textLabel.pin(.bottom, to: .bottom, of: scrollableContentView, constant: -Spacings.standard)
+    func configureTextlabel() {
+        textLabel.pin(.leading, to: .leading, of: scrollableContentView, constant: Constants.standardSpacing)
+        textLabel.pin(.trailing, to: .trailing, of: scrollableContentView, constant: -Constants.standardSpacing)
+        textLabel.pin(.top, to: .bottom, of: titleLabel, constant: Constants.standardSpacing)
+        textLabel.pin(.bottom, to: .bottom, of: scrollableContentView, constant: -Constants.standardSpacing)
     }
     
 }

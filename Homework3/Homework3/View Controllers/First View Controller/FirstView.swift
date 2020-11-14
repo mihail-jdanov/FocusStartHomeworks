@@ -10,6 +10,18 @@ import UIKit
 
 class FirstView: UIView {
     
+    private enum Constants {
+        static let smallSpacing: CGFloat = 8
+        static let standardSpacing: CGFloat = 16
+        static let largeFontSize: CGFloat = 30
+        static let thirdLabelNumberOfLines = 2
+        static let firstButtonWidth: CGFloat = 100
+        static let secondButtonWidth: CGFloat = 200
+        static let secondButtonHeight: CGFloat = 36
+        static let secondButtonCornerRadius: CGFloat = 8
+        static let imageViewAlpha: CGFloat = 0.4
+    }
+    
     // MARK: - Views
     
     private let stackView: UIStackView = {
@@ -31,7 +43,7 @@ class FirstView: UIView {
         let label = UILabel()
         label.text = "text2"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = UIFont.systemFont(ofSize: Constants.largeFontSize)
         return label
     }()
     
@@ -39,8 +51,8 @@ class FirstView: UIView {
         let label = UILabel()
         label.text = "text3\ntext3"
         label.textAlignment = .center
-        label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.numberOfLines = Constants.thirdLabelNumberOfLines
+        label.font = UIFont.systemFont(ofSize: Constants.largeFontSize, weight: .bold)
         return label
     }()
     
@@ -55,13 +67,13 @@ class FirstView: UIView {
         let button = UIButton()
         button.backgroundColor = .systemGray
         button.setTitle("Second button", for: .normal)
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Constants.secondButtonCornerRadius
         return button
     }()
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.alpha = 0.4
+        imageView.alpha = Constants.imageViewAlpha
         imageView.contentMode = .scaleAspectFit
         imageView.image = Images.leo
         return imageView
@@ -80,7 +92,7 @@ class FirstView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         backgroundColor = .lightGray
-        layoutViews()
+        configureSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,59 +103,46 @@ class FirstView: UIView {
 
 private extension FirstView {
     
-    // MARK: - Layout
+    // MARK: - Views configuration
     
-    func layoutViews() {
-        layoutStackView()
-        layoutFirstLabel()
-        layoutSecondLabel()
-        layoutThirdLabel()
-        layoutFirstButton()
-        layoutSecondButton()
-        layoutImageView()
-        layoutActivityIndicator()
+    func configureSubviews() {
+        addSubviews()
+        configureStackView()
+        configureFirstButton()
+        configureSecondButton()
+        configureActivityIndicator()
     }
     
-    func layoutStackView() {
+    func addSubviews() {
         addSubview(stackView)
-        stackView.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Spacings.standard)
-        stackView.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Spacings.standard)
-        stackView.pin(.top, to: .top, of: safeAreaLayoutGuide, constant: Spacings.small)
-        stackView.pin(.bottom, to: .bottom, of: safeAreaLayoutGuide, constant: -Spacings.small)
-    }
-    
-    func layoutFirstLabel() {
         stackView.addArrangedSubview(firstLabel)
-    }
-
-    func layoutSecondLabel() {
         stackView.addArrangedSubview(secondLabel)
-    }
-
-    func layoutThirdLabel() {
         stackView.addArrangedSubview(thirdLabel)
+        stackView.addArrangedSubview(firstButton)
+        stackView.addArrangedSubview(secondButton)
+        stackView.addArrangedSubview(imageView)
+        imageView.addSubview(activityIndicator)
     }
     
-    func layoutFirstButton() {
-        stackView.addArrangedSubview(firstButton)
-        let width: CGFloat = 100
-        firstButton.layer.cornerRadius = width / 2
-        firstButton.pin(.width, constant: width)
+    func configureStackView() {
+        stackView.pin(.leading, to: .leading, of: safeAreaLayoutGuide, constant: Constants.standardSpacing)
+        stackView.pin(.trailing, to: .trailing, of: safeAreaLayoutGuide, constant: -Constants.standardSpacing)
+        stackView.pin(.top, to: .top, of: safeAreaLayoutGuide, constant: Constants.smallSpacing)
+        stackView.pin(.bottom, to: .bottom, of: safeAreaLayoutGuide, constant: -Constants.smallSpacing)
+    }
+    
+    func configureFirstButton() {
+        firstButton.layer.cornerRadius = Constants.firstButtonWidth / 2
+        firstButton.pin(.width, constant: Constants.firstButtonWidth)
         firstButton.pin(.height, to: .width, of: firstButton)
     }
     
-    func layoutSecondButton() {
-        stackView.addArrangedSubview(secondButton)
-        secondButton.pin(.width, constant: 200)
-        secondButton.pin(.height, constant: 36)
+    func configureSecondButton() {
+        secondButton.pin(.width, constant: Constants.secondButtonWidth)
+        secondButton.pin(.height, constant: Constants.secondButtonHeight)
     }
     
-    func layoutImageView() {
-        stackView.addArrangedSubview(imageView)
-    }
-    
-    func layoutActivityIndicator() {
-        stackView.addSubview(activityIndicator)
+    func configureActivityIndicator() {
         activityIndicator.pin(.centerX, to: .centerX, of: imageView)
         activityIndicator.pin(.centerY, to: .centerY, of: imageView)
     }
