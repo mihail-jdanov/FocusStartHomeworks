@@ -108,7 +108,7 @@ class SecondView: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
         guard traitCollection.horizontalSizeClass != previousTraitCollection?.horizontalSizeClass ||
             traitCollection.verticalSizeClass != previousTraitCollection?.verticalSizeClass
-            else { return }
+        else { return }
         refreshConstraints()
     }
 
