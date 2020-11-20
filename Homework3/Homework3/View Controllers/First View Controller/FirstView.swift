@@ -90,7 +90,7 @@ class FirstView: UIView {
     // MARK: - Life cycle
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         backgroundColor = .lightGray
         configureSubviews()
     }
